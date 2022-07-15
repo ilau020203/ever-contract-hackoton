@@ -14,7 +14,6 @@ abstract contract Offer {
     uint128 public static price;
     address public static addrData;
 
-    bytes static deployHash;
 
     address public marketRootAddr;
     address public tokenRootAddr;

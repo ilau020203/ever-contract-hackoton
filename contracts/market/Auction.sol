@@ -88,7 +88,7 @@ contract Auction is Offer {
     }
 
     function finishAuction() public {
-        require(now >= auctionEndTime, AuctionErrors.auction_still_in_progress);
+        // require(now >= auctionEndTime, AuctionErrors.auction_still_in_progress);
         tvm.accept();
         mapping(address => ITIP4_1NFT.CallbackParams)  empty;
         if (maxBidValue > 0) {
@@ -97,6 +97,7 @@ contract Auction is Offer {
                 royaltyAuthor.transfer(royaltyValue, false);
             }
             ITIP4_1NFT(addrData).transfer{value: Constants.MIN_FOR_DEPLOY + 0.1 ton, bounce: true}(currentBid.addr,marketRootAddr,empty);
+            ITIP4_1NFT(addrData).changeManager{value: 0.1 ton}(currentBid.addr,marketRootAddr,empty);
             addrOwner.transfer(maxBidValue - totalFeeValue, false);
             emit AuctionFinished(currentBid.addr, maxBidValue);
             selfdestruct(marketRootAddr);

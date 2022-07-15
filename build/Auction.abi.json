@@ -139,8 +139,7 @@
 	],
 	"data": [
 		{"key":1,"name":"price","type":"uint128"},
-		{"key":2,"name":"addrData","type":"address"},
-		{"key":3,"name":"deployHash","type":"bytes"}
+		{"key":2,"name":"addrData","type":"address"}
 	],
 	"events": [
 		{
@@ -184,7 +183,6 @@
 		{"name":"_constructorFlag","type":"bool"},
 		{"name":"price","type":"uint128"},
 		{"name":"addrData","type":"address"},
-		{"name":"deployHash","type":"bytes"},
 		{"name":"marketRootAddr","type":"address"},
 		{"name":"tokenRootAddr","type":"address"},
 		{"name":"addrOwner","type":"address"},
