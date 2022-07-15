@@ -5,7 +5,8 @@
   "scripts": {
     "build": "locklift build --config locklift.config.js",
     "deploy": "locklift run --config locklift.config.js --network devnet --script scripts/1-deploy-collection.js",
-    "deployMarket": "locklift run --config locklift.config.js --network devnet --script scripts/2-deploy-auction.js"
+    "deployMarket": "locklift run --config locklift.config.js --network devnet --script scripts/2-deploy-auction.js",
+    "deploySale": "locklift run --config locklift.config.js --network devnet --script scripts/3-deploy-sale.js"
   },
   "author": "itgold.io",
   "license": "MIT",

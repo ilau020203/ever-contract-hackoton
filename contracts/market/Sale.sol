@@ -3,145 +3,71 @@ pragma AbiHeader expire;
 pragma AbiHeader pubkey;
 pragma AbiHeader time;
 
+import "@broxus/contracts/contracts/libraries/MsgFlag.sol";
+import "@itgold/everscale-tip/contracts/TIP4_1/interfaces/ITIP4_1NFT.sol";
 
-import "./errors/AuctionErrors.sol";
+import "./errors/SaleErrors.sol";
+import "./errors/BaseErrors.sol";
 
-// contract Auction {
-// 	uint256 auctionDuration;
-// 	uint256 auctionEndTime;
-// 	uint8 bidDelta;
+contract Sale {
+	address static owner;
+	address static root;
 
-// 	uint128 storageFee;
+	mapping(address => uint128) prices;
 
-// 	struct Bid {
-// 		address addr;
-// 		uint128 value;
-// 	}
+	event SetToSale(address nft, uint128 price);
+	event DeleteFromSale(address nft);
 
-// 	Bid public currentBid;
-// 	uint128 public maxBidValue;
-// 	uint128 public nextBidValue;
+	modifier onlyOwner() {
+		require(msg.sender == owner, BaseErrors.message_sender_is_not_my_owner);
+		_;
+	}
 
-// 	event BidPlaced(address buyerAddress, uint128 value);
-// 	event BidDeclined(address buyerAddress, uint128 value);
-// 	event AuctionFinished(address newOwner, uint128 price);
-// 	event AuctionCancelled();
+	constructor() public {
+		tvm.accept();
+	}
 
-// 	constructor(
-// 		address _marketRootAddr,
-// 		address _tokenRootAddr,
-// 		address _addrOwner,
-// 		uint128 _marketFee,
-// 		uint8 _marketFeeDecimals,
-// 		uint128 _auctionDuration,
-// 		uint8 _bidDelta,
-// 		uint128 _storageFee,
-// 		uint8 _royalty,
-// 		address _royaltyAuthor
-// 	) public {
-// 		tvm.accept();
+	function buy(address nft) external {
+		require(owner != msg.sender, SaleErrors.BUYER_IS_MY_OWNER);
+		require(prices.exists(nft), SaleErrors.NFT_NOT_FOR_SALE);
+		require(msg.value >= prices[nft], SaleErrors.MSG_VALUE_IS_SMALL);
+		tvm.rawReserve(0.5 ton, 0);
+	    owner.transfer(prices[nft], false,MsgFlag.SENDER_PAYS_FEES);
+		mapping(address => ITIP4_1NFT.CallbackParams) empty;
+		ITIP4_1NFT(nft).transfer{
+         value: 0,
+        flag: MsgFlag.ALL_NOT_RESERVED	
+		}
+        (msg.sender, address(this), empty);
+	}
 
-// 		setDefaultProperties(
-// 			_marketRootAddr,
-// 			_tokenRootAddr,
-// 			_addrOwner,
-// 			_marketFee,
-// 			_marketFeeDecimals,
-// 			_royalty,
-// 			_royaltyAuthor
-// 		);
+	function setToSale(address nft, uint128 price) external onlyOwner {
+		tvm.rawReserve(0.5 ton, 0);
+		prices[nft] = price;
+		emit SetToSale(nft, price);
+	}
 
-// 		auctionDuration = _auctionDuration;
-// 		auctionEndTime = now + _auctionDuration;
-// 		bidDelta = _bidDelta;
-// 		nextBidValue = price;
+	function deleteFromSale(address nft) external onlyOwner {
+		tvm.rawReserve(0.5 ton, 0);
+		mapping(address => ITIP4_1NFT.CallbackParams) empty;
+		delete prices[nft];
+		emit DeleteFromSale(nft);
+		ITIP4_1NFT(nft).changeManager{
+			value: 0,
+			flag: MsgFlag.ALL_NOT_RESERVED,
+			bounce: false
+		}(owner, owner, empty);
+	}
 
-// 		storageFee = _storageFee;
-// 	}
+	function getPrices() external view returns (mapping(address => uint128)) {
+		return prices;
+	}
 
-// 	function placeBid() external {
-// 		require(addrOwner != msg.sender, OffersBaseErrors.buyer_is_my_owner);
-// 		require(msg.value >= nextBidValue, AuctionErrors.bid_is_too_low);
+	function getRoot() external view responsible returns (address) {
+		return {value: 0, bounce: false, flag: MsgFlag.REMAINING_GAS} root;
+	}
 
-// 		if (now >= auctionEndTime) {
-// 			emit BidDeclined(msg.sender, msg.value);
-// 			msg.sender.transfer(msg.value, false, 1);
-// 			finishAuction();
-// 		} else {
-// 			processBid(msg.sender, msg.value);
-// 		}
-// 	}
-
-// 	function processBid(address _newBidSender, uint128 _bid) private {
-// 		Bid _currentBid = currentBid;
-// 		Bid newBid = Bid(_newBidSender, _bid);
-// 		maxBidValue = _bid;
-// 		currentBid = newBid;
-// 		calculateAndSetNextBid();
-// 		emit BidPlaced(_newBidSender, _bid);
-// 		// Return lowest bid value to the bidder's address
-// 		if (_currentBid.value > 0) {
-// 			_currentBid.addr.transfer(_currentBid.value - storageFee, false);
-// 		}
-// 	}
-
-// 	function finishAuction() public {
-// 		// require(now >= auctionEndTime, AuctionErrors.auction_still_in_progress); for test !!!!!!!!!!!
-// 		tvm.accept();
-// 		mapping(address => ITIP4_1NFT.CallbackParams) empty;
-// 		if (maxBidValue > 0) {
-// 			(uint128 totalFeeValue, uint128 royaltyValue, ) = getFeesValues(
-// 				maxBidValue
-// 			);
-// 			if (royaltyValue > 0) {
-// 				royaltyAuthor.transfer(royaltyValue, false);
-// 			}
-// 			ITIP4_1NFT(addrData).transfer{
-// 				value: Constants.MIN_FOR_DEPLOY + 0.1 ton,
-// 				bounce: true
-// 			}(currentBid.addr, marketRootAddr, empty);
-// 			ITIP4_1NFT(addrData).changeManager{value: 0.1 ton}(
-// 				currentBid.addr,
-// 				marketRootAddr,
-// 				empty
-// 			);
-// 			addrOwner.transfer(maxBidValue - totalFeeValue, false);
-// 			emit AuctionFinished(currentBid.addr, maxBidValue);
-// 			selfdestruct(marketRootAddr);
-// 		} else {
-// 			ITIP4_1NFT(addrData).changeManager{value: 0.1 ton}(
-// 				addrOwner,
-// 				addrOwner,
-// 				empty
-// 			);
-// 			emit AuctionCancelled();
-// 			selfdestruct(addrOwner);
-// 		}
-// 	}
-
-// 	function getAuctionInfo()
-// 		public
-// 		view
-// 		returns (
-// 			uint128 startPrice,
-// 			uint8 delta,
-// 			uint256 duration,
-// 			uint256 endTime,
-// 			address currentBidAddr,
-// 			uint128 currentBidValue
-// 		)
-// 	{
-// 		startPrice = price;
-// 		delta = bidDelta;
-// 		duration = auctionDuration;
-// 		endTime = auctionEndTime;
-// 		currentBidAddr = currentBid.addr;
-// 		currentBidValue = currentBid.value;
-// 	}
-
-// 	function calculateAndSetNextBid() private {
-// 		nextBidValue =
-// 			maxBidValue +
-// 			math.muldiv(maxBidValue, uint128(bidDelta), uint128(100));
-// 	}
-// }
+	function getOwner() external view responsible returns (address) {
+		return {value: 0, bounce: false, flag: MsgFlag.REMAINING_GAS} owner;
+	}
+}

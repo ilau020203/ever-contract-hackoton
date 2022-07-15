@@ -1,0 +1,96 @@
+{
+	"ABI version": 2,
+	"version": "2.2",
+	"header": ["pubkey", "time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "sale",
+			"inputs": [
+				{"name":"nft","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setToSale",
+			"inputs": [
+				{"name":"nft","type":"address"},
+				{"name":"price","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "deleteFromSale",
+			"inputs": [
+				{"name":"nft","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getPrices",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"map(address,uint128)"}
+			]
+		},
+		{
+			"name": "getRoot",
+			"inputs": [
+				{"name":"answerId","type":"uint32"}
+			],
+			"outputs": [
+				{"name":"value0","type":"address"}
+			]
+		},
+		{
+			"name": "getOwner",
+			"inputs": [
+				{"name":"answerId","type":"uint32"}
+			],
+			"outputs": [
+				{"name":"value0","type":"address"}
+			]
+		}
+	],
+	"data": [
+		{"key":1,"name":"owner","type":"address"},
+		{"key":2,"name":"root","type":"address"}
+	],
+	"events": [
+		{
+			"name": "SetToSale",
+			"inputs": [
+				{"name":"nft","type":"address"},
+				{"name":"price","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "DeleteFromSale",
+			"inputs": [
+				{"name":"nft","type":"address"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"owner","type":"address"},
+		{"name":"root","type":"address"},
+		{"name":"prices","type":"map(address,uint128)"}
+	]
+}

@@ -101,11 +101,11 @@ contract Auction is Offer {
 				value: Constants.MIN_FOR_DEPLOY + 0.1 ton,
 				bounce: true
 			}(currentBid.addr, marketRootAddr, empty);
-			ITIP4_1NFT(addrData).changeManager{value: 0.1 ton}(
-				currentBid.addr,
-				marketRootAddr,
-				empty
-			);
+			// ITIP4_1NFT(addrData).changeManager{value: 0.1 ton}(
+			// 	currentBid.addr,
+			// 	marketRootAddr,
+			// 	empty
+			// );
 			addrOwner.transfer(maxBidValue - totalFeeValue, false);
 			emit AuctionFinished(currentBid.addr, maxBidValue);
 			selfdestruct(marketRootAddr);

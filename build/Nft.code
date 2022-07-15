@@ -267,10 +267,8 @@ THROW 0
 CALL $_beforeTransfer_internal_macro$
 
 .macro _beforeTransfer_internal_macro
-.loc ../contracts/Nft.sol, 40
-CALLREF {
-	CALL $TIP4_3Nft__beforeTransfer_macro$
-}
+.loc ../contracts/Nft.sol, 35
+BLKDROP 3
 .loc ../contracts/Nft.sol, 0
 
 .globl	_afterTransfer_internal
@@ -278,10 +276,8 @@ CALLREF {
 CALL $_afterTransfer_internal_macro$
 
 .macro _afterTransfer_internal_macro
-.loc ../contracts/Nft.sol, 48
-CALLREF {
-	CALL $TIP4_3Nft__afterTransfer_macro$
-}
+.loc ../contracts/Nft.sol, 43
+BLKDROP 3
 .loc ../contracts/Nft.sol, 0
 
 .globl	_beforeChangeOwner_internal
@@ -289,10 +285,8 @@ CALLREF {
 CALL $_beforeChangeOwner_internal_macro$
 
 .macro _beforeChangeOwner_internal_macro
-.loc ../contracts/Nft.sol, 57
-CALLREF {
-	CALL $TIP4_3Nft__beforeChangeOwner_macro$
-}
+.loc ../contracts/Nft.sol, 51
+BLKDROP 4
 .loc ../contracts/Nft.sol, 0
 
 .globl	_afterChangeOwner_internal
@@ -300,10 +294,8 @@ CALLREF {
 CALL $_afterChangeOwner_internal_macro$
 
 .macro _afterChangeOwner_internal_macro
-.loc ../contracts/Nft.sol, 66
-CALLREF {
-	CALL $TIP4_3Nft__afterChangeOwner_macro$
-}
+.loc ../contracts/Nft.sol, 60
+BLKDROP 4
 .loc ../contracts/Nft.sol, 0
 
 .macro getJson
