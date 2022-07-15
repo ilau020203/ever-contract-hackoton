@@ -12,9 +12,19 @@
 				{"name":"indexDeployValue","type":"uint128"},
 				{"name":"indexDestroyValue","type":"uint128"},
 				{"name":"_gameCode","type":"bytes"},
+				{"name":"json","type":"string"},
 				{"name":"codeIndex","type":"cell"}
 			],
 			"outputs": [
+			]
+		},
+		{
+			"name": "getJson",
+			"inputs": [
+				{"name":"answerId","type":"uint32"}
+			],
+			"outputs": [
+				{"name":"json","type":"string"}
 			]
 		},
 		{
@@ -164,6 +174,7 @@
 		{"name":"_indexDeployValue","type":"uint128"},
 		{"name":"_indexDestroyValue","type":"uint128"},
 		{"name":"_codeIndex","type":"cell"},
+		{"name":"_json","type":"string"},
 		{"name":"gameCode","type":"bytes"}
 	]
 }

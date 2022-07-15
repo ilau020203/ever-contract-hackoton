@@ -99,7 +99,7 @@ CALLREF {
 CALLREF {
 	CALL $_transferOwnership_internal_macro$
 }
-.loc ../contracts/Collection.sol, 37
+.loc ../contracts/Collection.sol, 34
 ACCEPT
 .loc ../contracts/Collection.sol, 0
 CALLREF {
@@ -116,7 +116,8 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/Collection.sol, 40
+.loc ../contracts/Collection.sol, 37
+LDREF
 LDREF
 ENDS
 .loc ../contracts/Collection.sol, 0
@@ -130,7 +131,7 @@ CALLREF {
 THROW 0
 
 .macro mintNft_internal_macro
-.loc ../contracts/Collection.sol, 41
+.loc ../contracts/Collection.sol, 38
 DEPTH
 ADDCONST -2
 PICK
@@ -163,13 +164,14 @@ CALLREF {
 }
 .loc ../contracts/Collection.sol, 49
 GETGLOB 13
-ROLL 3
+BLKSWAP 2, 3
+SWAP
 GETGLOB 16
 GETGLOB 15
 GETGLOB 19
 GETGLOB 9
 DUP
-ROLL 7
+ROLL 8
 DUP
 HASHCU
 NEWC
@@ -177,8 +179,8 @@ STSLICECONST x801_
 STU 256
 ENDC
 CTOS
-ROLLREV 8
-PUSH S8
+ROLLREV 9
+PUSH S9
 NEWC
 STSLICECONST x62_
 STSLICE
@@ -209,16 +211,17 @@ CALLREF {
 }
 STREF
 STSLICECONST 1
+ROLLREV 8
+NEWC
+STSLICECONST x7c0f50d4
+STSLICE
 ROLLREV 7
 NEWC
-STSLICECONST x47ec8659
-STSLICE
-ROLLREV 6
-NEWC
 STSLICE
 STU 128
 STU 128
 STU 128
+STREF
 STREF
 STREF
 STBREFR
@@ -226,7 +229,7 @@ STBREFR
 ENDC
 PUSHINT 128
 SENDRAWMSG
-.loc ../contracts/Collection.sol, 63
+.loc ../contracts/Collection.sol, 60
 GETGLOB 9
 BLKPUSH 2, 0
 BLKSWAP 2, 3
@@ -266,7 +269,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/Collection.sol, 73
+.loc ../contracts/Collection.sol, 63
 OVER
 PUSHCONT {
 	LDREF
@@ -303,7 +306,7 @@ EQUAL
 THROWIFNOT 100
 .loc ../node_modules/@itgold/everscale-tip/contracts/access/OwnableExternal.sol, 32
 ACCEPT
-.loc ../contracts/Collection.sol, 74
+.loc ../contracts/Collection.sol, 64
 SETGLOB 19
 .loc ../contracts/Collection.sol, 0
 
@@ -328,7 +331,7 @@ EQUAL
 THROWIFNOT 100
 .loc ../node_modules/@itgold/everscale-tip/contracts/access/OwnableExternal.sol, 32
 ACCEPT
-.loc ../contracts/Collection.sol, 78
+.loc ../contracts/Collection.sol, 68
 TRUE
 .loc ../contracts/Collection.sol, 0
 
@@ -337,7 +340,7 @@ TRUE
 CALL $_buildNftState_internal_macro$
 
 .macro _buildNftState_internal_macro
-.loc ../contracts/Collection.sol, 85
+.loc ../contracts/Collection.sol, 78
 PUSHINT 0
 NEWC
 STU 256
@@ -2135,9 +2138,15 @@ THROW 60
 
 .macro public_function_selector
 DUP
-PUSHINT 348956614
+PUSHINT 263162756
 LEQ
 IFJMPREF {
+	DUP
+	PUSHINT 63645180
+	EQUAL
+	IFJMPREF {
+		CALL $mintNft$
+	}
 	DUP
 	PUSHINT 64331365
 	EQUAL
@@ -2156,17 +2165,17 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $nftCode$
 	}
+}
+DUP
+PUSHINT 852767119
+LEQ
+IFJMPREF {
 	DUP
 	PUSHINT 348956614
 	EQUAL
 	IFJMPREF {
 		CALL $indexCodeHash$
 	}
-}
-DUP
-PUSHINT 880007004
-LEQ
-IFJMPREF {
 	DUP
 	PUSHINT 786351675
 	EQUAL
@@ -2185,28 +2194,22 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $setRemainOnNft$
 	}
-	DUP
-	PUSHINT 880007004
-	EQUAL
-	IFJMPREF {
-		CALL $indexBasisCodeHash$
-	}
 }
 DUP
 PUSHINT 1479945602
 LEQ
 IFJMPREF {
 	DUP
+	PUSHINT 880007004
+	EQUAL
+	IFJMPREF {
+		CALL $indexBasisCodeHash$
+	}
+	DUP
 	PUSHINT 953907334
 	EQUAL
 	IFJMPREF {
 		CALL $resolveIndexBasis$
-	}
-	DUP
-	PUSHINT 1119196584
-	EQUAL
-	IFJMPREF {
-		CALL $mintNft$
 	}
 	DUP
 	PUSHINT 1383720816

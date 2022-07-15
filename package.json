@@ -10,6 +10,7 @@
   "author": "itgold.io",
   "license": "MIT",
   "dependencies": {
+    "@broxus/contracts": "^1.0.4",
     "@itgold/everscale-tip": "^1.1.3",
     "locklift": "git+https://github.com/broxus/ton-locklift.git"
   }
