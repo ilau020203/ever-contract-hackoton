@@ -1,0 +1,69 @@
+{
+	"ABI version": 2,
+	"version": "2.2",
+	"header": ["pubkey", "time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+				{"name":"_saleCode","type":"cell"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "deploySale",
+			"inputs": [
+				{"name":"_owner","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setAcuctionCode",
+			"inputs": [
+				{"name":"_saleCode","type":"cell"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "saleCode",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"saleCode","type":"cell"}
+			]
+		},
+		{
+			"name": "version",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"version","type":"uint8"}
+			]
+		}
+	],
+	"data": [
+		{"key":1,"name":"owner","type":"address"}
+	],
+	"events": [
+		{
+			"name": "DeploySale",
+			"inputs": [
+				{"name":"creator","type":"address"},
+				{"name":"contract_address","type":"address"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"owner","type":"address"},
+		{"name":"saleCode","type":"cell"},
+		{"name":"version","type":"uint8"}
+	]
+}

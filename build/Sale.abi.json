@@ -11,7 +11,7 @@
 			]
 		},
 		{
-			"name": "sale",
+			"name": "buy",
 			"inputs": [
 				{"name":"nft","type":"address"}
 			],
