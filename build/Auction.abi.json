@@ -1,0 +1,203 @@
+{
+	"ABI version": 2,
+	"version": "2.2",
+	"header": ["pubkey", "time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+				{"name":"_marketRootAddr","type":"address"},
+				{"name":"_tokenRootAddr","type":"address"},
+				{"name":"_addrOwner","type":"address"},
+				{"name":"_marketFee","type":"uint128"},
+				{"name":"_marketFeeDecimals","type":"uint8"},
+				{"name":"_auctionDuration","type":"uint128"},
+				{"name":"_bidDelta","type":"uint8"},
+				{"name":"_storageFee","type":"uint128"},
+				{"name":"_royalty","type":"uint8"},
+				{"name":"_royaltyAuthor","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "placeBid",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "finishAuction",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getAuctionInfo",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"startPrice","type":"uint128"},
+				{"name":"delta","type":"uint8"},
+				{"name":"duration","type":"uint256"},
+				{"name":"endTime","type":"uint256"},
+				{"name":"currentBidAddr","type":"address"},
+				{"name":"currentBidValue","type":"uint128"}
+			]
+		},
+		{
+			"name": "getRoyaltyInfo",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value","type":"uint8"},
+				{"name":"author","type":"address"}
+			]
+		},
+		{
+			"name": "price",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"price","type":"uint128"}
+			]
+		},
+		{
+			"name": "addrData",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"addrData","type":"address"}
+			]
+		},
+		{
+			"name": "marketRootAddr",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"marketRootAddr","type":"address"}
+			]
+		},
+		{
+			"name": "tokenRootAddr",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"tokenRootAddr","type":"address"}
+			]
+		},
+		{
+			"name": "addrOwner",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"addrOwner","type":"address"}
+			]
+		},
+		{
+			"name": "marketFee",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"marketFee","type":"uint128"}
+			]
+		},
+		{
+			"name": "marketFeeDecimals",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"marketFeeDecimals","type":"uint8"}
+			]
+		},
+		{
+			"name": "currentBid",
+			"inputs": [
+			],
+			"outputs": [
+				{"components":[{"name":"addr","type":"address"},{"name":"value","type":"uint128"}],"name":"currentBid","type":"tuple"}
+			]
+		},
+		{
+			"name": "maxBidValue",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"maxBidValue","type":"uint128"}
+			]
+		},
+		{
+			"name": "nextBidValue",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"nextBidValue","type":"uint128"}
+			]
+		}
+	],
+	"data": [
+		{"key":1,"name":"price","type":"uint128"},
+		{"key":2,"name":"addrData","type":"address"},
+		{"key":3,"name":"deployHash","type":"bytes"}
+	],
+	"events": [
+		{
+			"name": "BidPlaced",
+			"inputs": [
+				{"name":"buyerAddress","type":"address"},
+				{"name":"value","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "BidDeclined",
+			"inputs": [
+				{"name":"buyerAddress","type":"address"},
+				{"name":"value","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "AuctionFinished",
+			"inputs": [
+				{"name":"newOwner","type":"address"},
+				{"name":"price","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "AuctionCancelled",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		}
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"price","type":"uint128"},
+		{"name":"addrData","type":"address"},
+		{"name":"deployHash","type":"bytes"},
+		{"name":"marketRootAddr","type":"address"},
+		{"name":"tokenRootAddr","type":"address"},
+		{"name":"addrOwner","type":"address"},
+		{"name":"marketFee","type":"uint128"},
+		{"name":"marketFeeDecimals","type":"uint8"},
+		{"name":"royalty","type":"uint8"},
+		{"name":"royaltyAuthor","type":"address"},
+		{"name":"auctionDuration","type":"uint256"},
+		{"name":"auctionEndTime","type":"uint256"},
+		{"name":"bidDelta","type":"uint8"},
+		{"name":"storageFee","type":"uint128"},
+		{"components":[{"name":"addr","type":"address"},{"name":"value","type":"uint128"}],"name":"currentBid","type":"tuple"},
+		{"name":"maxBidValue","type":"uint128"},
+		{"name":"nextBidValue","type":"uint128"}
+	]
+}
