@@ -1,1 +1,7 @@
-/node_modeles
+*.code
+
+# Dependency directory
+node_modules/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
