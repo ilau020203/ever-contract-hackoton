@@ -34,7 +34,7 @@ contract Collection is TIP4_3Collection, OwnableExternal {
 		tvm.accept();
 	}
 
-	function mintNft(bytes gameCode, string json) external virtual {
+	function mintNft(string gameCode, string json) external virtual {
 		require(
 			msg.value > _remainOnNft + 0.1 ton,
 			value_is_less_than_required

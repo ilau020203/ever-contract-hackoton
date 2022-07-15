@@ -11,7 +11,7 @@ import "@itgold/everscale-tip/contracts/TIP4_3/TIP4_3Nft.sol";
 import "@itgold/everscale-tip/contracts/TIP4_2/TIP4_2Nft.sol";
 
 contract Nft is TIP4_1Nft, TIP4_3Nft, TIP4_2Nft{
-	bytes public gameCode;
+	string public gameCode;
 
 	constructor(
 		address owner,
@@ -19,7 +19,7 @@ contract Nft is TIP4_1Nft, TIP4_3Nft, TIP4_2Nft{
 		uint128 remainOnNft,
 		uint128 indexDeployValue,
 		uint128 indexDestroyValue,
-		bytes _gameCode,
+		string _gameCode,
 		string json,
 		TvmCell codeIndex
 	)

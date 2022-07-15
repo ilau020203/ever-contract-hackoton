@@ -11,7 +11,7 @@
 				{"name":"remainOnNft","type":"uint128"},
 				{"name":"indexDeployValue","type":"uint128"},
 				{"name":"indexDestroyValue","type":"uint128"},
-				{"name":"_gameCode","type":"bytes"},
+				{"name":"_gameCode","type":"string"},
 				{"name":"json","type":"string"},
 				{"name":"codeIndex","type":"cell"}
 			],
@@ -113,7 +113,7 @@
 			"inputs": [
 			],
 			"outputs": [
-				{"name":"gameCode","type":"bytes"}
+				{"name":"gameCode","type":"string"}
 			]
 		}
 	],
@@ -175,6 +175,6 @@
 		{"name":"_indexDestroyValue","type":"uint128"},
 		{"name":"_codeIndex","type":"cell"},
 		{"name":"_json","type":"string"},
-		{"name":"gameCode","type":"bytes"}
+		{"name":"gameCode","type":"string"}
 	]
 }
