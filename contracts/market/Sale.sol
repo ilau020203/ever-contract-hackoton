@@ -39,6 +39,7 @@ contract Sale {
         flag: MsgFlag.ALL_NOT_RESERVED	
 		}
         (msg.sender, address(this), empty);
+		delete prices[nft];
 	}
 
 	function setToSale(address nft, uint128 price) external onlyOwner {
